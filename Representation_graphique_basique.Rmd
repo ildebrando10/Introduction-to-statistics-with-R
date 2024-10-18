@@ -1,0 +1,53 @@
+---
+title: "Representations graphiques"
+author: "Martin ADECHI"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+La description du jeu de données:
+- age: l'âge du detenu
+- prof: la profession du detenu
+- dep.cons: existence d'un diagnostic de depression
+- scz.cons: existence d'un diagnostic de schizophrénie
+- grav.cons: gravité de la pathologie
+- n.enfant: nombre d'enfant
+- rs: niveau de recherche de la sensation
+- ed: niveau d'évitement du danger
+- dr: niveau de dépendance a la récompense
+```{r}
+data_source = read.csv2("smp1.csv")
+```
+Les strings doivent être sous forme de facteurs et non de chaine de charactère donc on ajouteras l'option `stringsAsFactors=TRUE` lors de l'import
+```{r}
+data_source = read.csv2("smp1.csv",stringsAsFactors=TRUE)
+```
+### Visualisation
+
+```{r}
+barplot(table(data_source$prof))
+```
+```{r}
+pie(table(data_source$prof))
+```
+```{r}
+hist(data_source$age,col='grey')
+```
+```{r}
+boxplot(data_source$age)
+```
+```{r}
+boxplot(data_source$age~data_source$rs)
+```
+
+```{r}
+plot(data_source$age,data_source$n.enfant)
+```
+```{r}
+plot(jitter(data_source$age),jitter(data_source$n.enfant))
+```
+
